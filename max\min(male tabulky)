@@ -1,0 +1,20 @@
+def get_extreme_per_protein(group, ascending=True):
+    return (melted[melted['protein_id'].isin(group)]
+            .sort_values(['protein_id', 'value'], ascending=[True, ascending])
+            .groupby('protein_id').head(1)
+            .reset_index(drop=True))
+
+#  P60002, P60059, P62917 (minimun)
+group1 = ['P60002', 'P60059', 'P62917']
+min_group1 = get_extreme_per_protein(group1, ascending=True)
+display(min_group1)
+
+# Q6UXN9, P59998, Q7RTV0 (minimum)
+group2 = ['Q6UXN9', 'P59998', 'Q7RTV0']
+min_group2 = get_extreme_per_protein(group2, ascending=True)
+display(min_group2)
+
+# P26951, Q8N5Q1, Q6ZQX7 (maximum)
+group3 = ['P26951', 'Q8N5Q1', 'Q6ZQX7']
+max_group3 = get_extreme_per_protein(group3, ascending=False)
+display(max_group3)
